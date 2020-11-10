@@ -3,14 +3,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+/**
+ * 
+ * @author Aidan Forester and Ahmed Iqbal
+ * creates a client to communicate with the date server
+ *
+ */
 public class Client {
 	
 	private PrintWriter socketOut;
 	private Socket palinSocket;
 	private BufferedReader stdIn;
 	private BufferedReader socketIn;
-
+	
+	/**
+	 * creates a client object with a server name and a port number
+	 * 
+	 * @param serverName
+	 * @param portNumber
+	 */
 	public Client(String serverName, int portNumber) {
 		try {
 			palinSocket = new Socket(serverName, portNumber);
@@ -22,7 +33,9 @@ public class Client {
 			System.err.println(e.getStackTrace());
 		}
 	}
-
+	/**
+	 * establishes a connection with the server
+	 */
 	public void communicate () {
 		String line = "";
 		String response = "";
@@ -42,7 +55,9 @@ public class Client {
 		}
 		closeSocket ();
 	}
-	
+	/**
+	 * closes the socket once the program is finished 
+	 */
 	private void closeSocket () {
 		
 		try {
@@ -55,6 +70,11 @@ public class Client {
 		}
 		
 	}
+	/**
+	 * runs client
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException  {
 		Client aClient = new Client("localhost", 9010);
 		aClient.communicate();
