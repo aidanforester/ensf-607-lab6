@@ -1,4 +1,3 @@
-package exercise3;
 /** 
  * Started by M. Moussavi
  * March 2015
@@ -16,9 +15,11 @@ public class ReadRecord {
     
     /**
      *  opens an ObjectInputStream using a FileInputStream
+     * @throws IOException 
+     * @throws ClassNotFoundException 
      */
     
-    private void readObjectsFromFile(String name) throws EOFException
+    private void readObjectsFromFile(String name) throws ClassNotFoundException, IOException
     {
         MusicRecord record ;
         
@@ -33,32 +34,35 @@ public class ReadRecord {
         
         /* The following loop is supposed to use readObject method of
          * ObjectInputSteam to read a MusicRecord object from a binary file that
-         * contains several records.
+         * contains several reords.
          * Loop should terminate when an EOFException is thrown.
          */
         
         try
         {
-            while ( true )
+            while (true)
             {
-                
+                record = (MusicRecord)input.readObject();
+                System.out.println(record.getYear());
+                System.out.println(record.getSongName());
+                System.out.println(record.getSingerName());
+                System.out.println(record.getPurchasePrice());
                 
                 // TO BE COMPLETED BY THE STUDENTS
-                record = (MusicRecord) input.readObject();
-                System.out.printf("%-10d%-23s%-18s%-10.2f\n", record.getYear(), record.getSongName(),record.getSingerName(),record.getPurchasePrice());
+                
+           
             }   // END OF WHILE
-        }catch( ClassNotFoundException | IOException e) {
-        	System.err.println("error");
-        	e.printStackTrace();
+        } catch (IOException EOFException){
+        	System.out.println(EOFException);
+        	System.out.println("End of file or end of stream has been reached unexpectedly during input.");
         }
-                // ADD NECESSARY catch CLAUSES HERE
-
+                    // ADD NECESSARY catch CLAUSES HERE
     }           // END OF METHOD 
     
     
-    public static void main(String [] args) throws EOFException
+    public static void main(String [] args) throws ClassNotFoundException, IOException
     {
         ReadRecord d = new ReadRecord();
-        d.readObjectsFromFile("mySongs.ser");
+        d.readObjectsFromFile("allSongs.ser");
     }
 }

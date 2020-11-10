@@ -1,20 +1,30 @@
-package exercise3;
 /**
-
  * Started by M. Moussavi
  * March 2015
  * Completed by: STUDENT(S) NAME
  */
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * @author Ahmed Iqbal
+ *
+ */
+/**
+ * @author Ahmed Iqbal
+ *
+ */
+/**
+ * @author Ahmed Iqbal
+ *
+ */
 public class WriteRecord {
 
 	ObjectOutputStream objectOut = null;
@@ -47,38 +57,35 @@ public class WriteRecord {
 	/**
 	 * Opens a file input stream, using the data field textFileIn
 	 * @param textFileName name of text file to open
+	 * @throws IOException 
 	 */
-	public void openFileInputStream(String textFileName) {
+	public void openFileInputStream(String textFileName) throws IOException {
         
      // TO BE COMPLETED BY THE STUDENTS
-		File file = new File(textFileName);
-		try {
-			textFileIn = new Scanner(file);
-		}catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		textFileIn = new Scanner (new FileInputStream(textFileName));
+
 	}
 
 	/**
 	 * Opens an ObjectOutputStream using objectOut data field
 	 * @param objectFileName name of the object file to be created
+	 * @throws IOException 
 	 */
-	public void openObjectOutputStream(String objectFileName) {
+	public void openObjectOutputStream(String objectFileName) throws IOException {
         
     // TO BE COMPLETED BY THE STUDENTS
-        try {
-			objectOut = new ObjectOutputStream(new FileOutputStream(objectFileName));
-		} catch (IOException e) {
-			System.err.println("error opening the file");
-		}
+		//ObjectInputStream input = new ObjectInputStream (new FileInputStream(objectFileName));
+		FileOutputStream fos = new FileOutputStream(objectFileName);
+        objectOut = new ObjectOutputStream(fos);
 	}
 	
 	/**
 	 * Reads records from given text file, fills the blank MusicRecord
 	 * created by the constructor with the existing data in the text
 	 * file and serializes each record object into a binary file
+	 * @throws IOException 
 	 */
-	public void createObjectFile() {
+	public void createObjectFile() throws IOException {
 
 		while (textFileIn.hasNext()) // loop until end of text file is reached
 		{
@@ -98,29 +105,14 @@ public class WriteRecord {
 			textFileIn.nextLine();   // read the dashed lines and do nothing
             
             // THE REST OF THE CODE TO BE COMPLETED BY THE STUDENTS
-			try{
-				record = new MusicRecord(year, songName, singerName, price);
-				objectOut.writeObject(record);
-			}catch(IOException e) {
-				System.err.println("error writing to file");
-				
-			}catch(NoSuchElementException e) {
-				System.err.println("invlaid input, please try again");
-			}
-			
-		}
-
-		// YOUR CODE GOES HERE
-		
-		try {
-			if(objectOut != null)
-				objectOut.close();
-		}catch(IOException e) {
-			System.err.println("error closing file");
-			System.exit(1);
 		}
 		
+		if (objectOut != null) {
+			objectOut.writeObject(this.record); //write object into objectOut
+			objectOut.close();
+		}
 		
+		objectOut.flush();
 	}
 
 	public static void main(String[] args) throws IOException {
