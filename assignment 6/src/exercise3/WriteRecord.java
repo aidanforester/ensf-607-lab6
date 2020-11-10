@@ -14,17 +14,10 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * @author Ahmed Iqbal
+ * @author Aidan Forester and Ahmed Iqbal
  *
  */
-/**
- * @author Ahmed Iqbal
- *
- */
-/**
- * @author Ahmed Iqbal
- *
- */
+
 public class WriteRecord {
 
 	ObjectOutputStream objectOut = null;
