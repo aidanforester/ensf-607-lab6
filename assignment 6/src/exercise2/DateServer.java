@@ -1,4 +1,3 @@
-package exercise2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class DateServer {
 	 */
 	public DateServer() {
 		try {
-			serverSocket = new ServerSocket(9090);
+			serverSocket = new ServerSocket(9010);
 			System.out.println("Date Server is now running.");
 			aSocket = serverSocket.accept();
 			socketInput = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
