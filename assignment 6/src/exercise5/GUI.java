@@ -20,6 +20,10 @@ import java.awt.Insets;
 import javax.swing.JButton;
 
 
+/**
+ * @author Aidan Forester and Ahmed Iqbal
+ *creates a Gui interface for the tic tac toe'
+ */
 public class GUI {
 	
 	private JFrame display;
@@ -41,12 +45,16 @@ public class GUI {
 	
 	
 	
-	
+	/**
+	 * calls the build method to create the GUI
+	 */
 	public GUI() {
-		start();
+		build();
 	}
-	
-	private void start()  {
+	/**
+	 * builds the GUI
+	 */
+	private void build()  {
 		//create frame and set the bounds for the window
 		display = new JFrame();
 		display.setBounds(100, 100, 800, 500);
@@ -197,7 +205,10 @@ public class GUI {
 	}
 
 	
-	
+	/**
+	 * gets the display pane
+	 * @return
+	 */
 	public JFrame getDisplay() {
 		return display;
 	}
@@ -205,7 +216,10 @@ public class GUI {
 		this.display = display;
 	}
 
-	
+	/**
+	 * gets the mark, X or O
+	 * @return
+	 */
 	public char getMark() {
 		return mark;
 	}
@@ -213,7 +227,10 @@ public class GUI {
 		this.mark = mark;
 	}
 
-	
+	/**
+	 * gets the player text window
+	 * @return
+	 */
 	public JTextPane getPlayerText() {
 		return playerText;
 	}
@@ -221,7 +238,10 @@ public class GUI {
 		this.playerText = playerText;
 	}
 
-	
+	/**
+	 * gets the player name label
+	 * @return
+	 */
 	public JLabel getPlayerNameLabel() {
 		return playerNameLabel;
 	}
@@ -229,7 +249,10 @@ public class GUI {
 		this.playerNameLabel = playerNameLabel;
 	}
 
-	
+	/**
+	 * gets the player name text block
+	 * @return
+	 */
 	public JTextField getPlayerNameText() {
 		return playerNameText;
 	}
@@ -237,17 +260,27 @@ public class GUI {
 		this.playerNameText = playerNameText;
 	}
 	
-	
+	/**
+	 * gets the char field for which symbol the player is
+	 * @return
+	 */
 	public JTextField getCharField() {
 		return charField;
 	}
 	public void setCharField(JTextField charField) {
 		this.charField = charField;
 	}
-
+	/**
+	 * gets the action
+	 * @return
+	 */
 	public GUIAction getAction() {
 		return action;
 	}
+	/**
+	 * set which buttons have been pressed
+	 * @param check
+	 */
 	public void enable(boolean check) {
 		buttonTopLeft.setEnabled(check);
 		buttonTopMid.setEnabled(check);

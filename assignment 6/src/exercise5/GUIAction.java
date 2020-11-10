@@ -9,7 +9,11 @@ import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-
+/**
+ * 
+ * @author Aidan Forester and Ahmed Iqbal
+ * sets the actions for each of the buttons on the gui
+ */
 public class GUIAction implements MouseListener, ActionListener{
 	
 	private char mark;
@@ -25,6 +29,20 @@ public class GUIAction implements MouseListener, ActionListener{
 	boolean enable=false;
 	boolean clicked=false;
 	
+	/**
+	 * creates the gui action and sets each button to an action
+	 * @param playerNameText
+	 * @param mark
+	 * @param buttonTopLeft
+	 * @param buttonTopMid
+	 * @param buttonTopRight
+	 * @param buttonMidLeft
+	 * @param buttonMidMid
+	 * @param buttonMidRight
+	 * @param buttonBotLeft
+	 * @param buttonBotMid
+	 * @param buttonBotRight
+	 */
 	public GUIAction(JTextField playerNameText, char mark, JButton buttonTopLeft, JButton buttonTopMid,
 			JButton buttonTopRight, JButton buttonMidLeft, JButton buttonMidMid, JButton buttonMidRight,
 			JButton buttonBotLeft, JButton buttonBotMid, JButton buttonBotRight) {
@@ -43,7 +61,9 @@ public class GUIAction implements MouseListener, ActionListener{
 	}
 
 	
-	
+	/**
+	 * logic for when each button is clicked by a mouse, will display a mark and set it self to not being able to  be changed again
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		String text = "the box has already been clicked";
@@ -142,7 +162,9 @@ public class GUIAction implements MouseListener, ActionListener{
 		
 	}
 	
-	
+	/**
+	 * updates the players name text box based on the user input
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == playerNameText) {
