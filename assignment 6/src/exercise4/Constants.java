@@ -1,8 +1,7 @@
-package exercise4;
+//No changes to this interface
 /**
  * 
- * @author aidan
- * @version final
+ * @author Ahmed Iqbal, Aidan Forester
  * 
  * Constants class creates the three types of marks that can be on the board
  * space char represents that there is no players mark in that space

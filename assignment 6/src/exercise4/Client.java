@@ -1,5 +1,3 @@
-
-package exercise4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,12 +5,23 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+/**
+ * @author Ahmed Iqbal, Aidan Forester
+ * The client class that communicates with the server via sockets.
+ */
 public class Client {
 	private PrintWriter socketOut;
 	private Socket palinSocket;
 	private BufferedReader stdIn;
 	private BufferedReader socketIn;
+	private String line;
+	private String response;
 
+	/**
+	 * Constructor
+	 * @param serverName
+	 * @param portNumber
+	 */
 	public Client(String serverName, int portNumber) {
 		try {
 			palinSocket = new Socket(serverName, portNumber);
@@ -24,11 +33,13 @@ public class Client {
 			System.err.println(e.getStackTrace());
 		}
 	}
-
-	public void communicate () {
-		String line = "";
-		String response = "";
-		
+	
+	/**
+	 * Reads inputline
+	 */
+	private void serverReadLine() {
+		line = "";
+		response = "";
 		try {
 			response = socketIn.readLine();
 			if (response != null) {
@@ -39,7 +50,14 @@ public class Client {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	/**
+	 * Communicates with the server via sockets 
+	 */
+	public void communicate () {
 		
+		serverReadLine();
 		while (!response.equals("GAME OVER")) {
 			try {
 				response = socketIn.readLine();  
@@ -56,7 +74,10 @@ public class Client {
 		closeSocket();	
 	}
 	
-	private void closeSocket () {
+	/**
+	 * Closes the sockets used in communicate
+	 */
+	private void closeSocket () { //function for closing the sockets
 		try {
 			stdIn.close();
 			socketIn.close();
@@ -65,6 +86,7 @@ public class Client {
 			e.printStackTrace();
 		}	
 	}
+	
 
 	public static void main(String[] args) throws IOException  {
 		Client aClient = new Client("localhost", 8200);

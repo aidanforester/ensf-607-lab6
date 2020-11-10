@@ -1,12 +1,10 @@
-package exercise4;
 import java.io.*;
 
 //STUDENTS SHOULD ADD CLASS COMMENTS, METHOD COMMENTS, FIELD COMMENTS 
 
 
 /**
- * @author aidan
- * @version final
+ * @author Ahmed Iqbal, Aidan Forester
  * class game sets up the game mechanics for creating the referee and is the class that runs the program
  */
 public class Game implements Constants, Runnable{ //had to remove implements constants in order to implement runnable
@@ -45,15 +43,23 @@ public class Game implements Constants, Runnable{ //had to remove implements con
 	 * takes user input for the players names and where they want to place their marks on the board
 	 * @param args
 	 */
+	
+	@Override
 	public void run() {
+		startGame();
+	}
+	
+	/**
+	 * Sets up the actual game - to be called in run()
+	 */
+	public void startGame() {
 		xPlayer.setBoard(theBoard);
 		oPlayer.setBoard(theBoard);
 			
 		theRef = new Referee();
 		theRef.setoPlayer(oPlayer);
 		theRef.setxPlayer(xPlayer);
-	    appointReferee(theRef);    
-	   
+	    appointReferee(theRef); 
 	}
 }	
 

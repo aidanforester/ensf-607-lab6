@@ -1,9 +1,8 @@
-package exercise4;
-import java.io.IOException;
 
+import java.io.IOException;
+//No real changes to this class
 /**
- * @author aidan
- * @version final
+ * @author Ahemd Iqbal, Aidan Forester
  * class Referee sets the opponents the players and decides whose turn it is
  * 
  */

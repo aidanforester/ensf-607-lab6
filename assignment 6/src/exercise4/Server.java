@@ -1,4 +1,3 @@
-package exercise4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,17 +7,23 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * @author Ahmed Iqbal, Aidan Forester
+ * The server class that connects to the client via sockets.
+ */
 public class Server implements Constants{
-	private Socket aSocket;
+	private Socket palinSocket;
 	private ServerSocket serverSocket;
 	private PrintWriter socketOut;
 	private BufferedReader socketIn;
 	int count=0;
 	private Player xPlayer, oPlayer;
 	private String xName, oName;
-	
 	private ExecutorService pool;
 
+	/**
+	 * Constructor
+	 */
 	public Server() {
 		try {
 			serverSocket = new ServerSocket(8200);
@@ -29,27 +34,30 @@ public class Server implements Constants{
 
 	}
 
+	/**
+	 * Runs the server
+	 */
 	public void runServer() {
+		System.out.println("Server is looking for connection");
 		try {
 			while (true) {
-				aSocket = serverSocket.accept();
+				palinSocket = serverSocket.accept();
 				System.out.println("Console at Server side says: Connection accepted by the server!");
-				socketIn = new BufferedReader(new InputStreamReader(aSocket.getInputStream()));
-				socketOut = new PrintWriter(aSocket.getOutputStream(), true);
+				socketIn = new BufferedReader(new InputStreamReader(palinSocket.getInputStream()));
+				socketOut = new PrintWriter(palinSocket.getOutputStream(), true);
 				
 				count++; //increases when a new client is added
 				
-				if (count % 2 == 1) {
+				if (count % 2 == 1) { //only one player
 					socketOut.println("What is the name for X player?");
 					xName = socketIn.readLine();
 					xPlayer = new Player(xName, LETTER_X);
 				    xPlayer.setSocket(socketIn, socketOut);
-				}
-				else if(count % 2 == 0) {
+				} else if(count % 2 == 0) { //now theres two so a game can start
 					socketOut.println("What is the name for O player?");
 					oName = socketIn.readLine();
 				    oPlayer = new Player(oName, LETTER_O);
-				    xPlayer.getSocketOut().println("connected opponent " + oName);
+				    xPlayer.getSocketOut().println("opponent is " + oName);
 				    oPlayer.setSocket(socketIn, socketOut);
 				    Game theGame = new Game(xPlayer, oPlayer);
 				    
@@ -63,23 +71,19 @@ public class Server implements Constants{
 			e.printStackTrace();
 		}
 		
-		pool.shutdown();
-		
 		try {
+			pool.shutdown();
 			socketIn.close();
 			socketOut.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-
 	}
 	
 	public static void main(String[] args) throws IOException {
 
 		Server myServer = new Server();
 		myServer.runServer();
-		System.out.println("Server is running.");
 	}
 
 

@@ -1,11 +1,9 @@
-package exercise4;
 import java.io.PrintWriter;
 
-//STUDENTS SHOULD ADD CLASS COMMENTS, METHOD COMMENTS, FIELD COMMENTS 
+//This class was not changed much other than the socket
 /**
  * 
- * @author aidan
- * @version final
+ * @author Ahmed Iqbal, Aidan Forester
  * board class creates the game board that is displayed in the console
  */
 
@@ -16,7 +14,7 @@ public class Board implements Constants {
 	 */
 	private char theBoard[][];
 	private int markCount;
-	PrintWriter socket; //need this socket variable to communicate 
+	private PrintWriter socket; //need this socket variable to communicate 
 	
 	/**
 	 * constructor creates board and fills board with blank spaces
@@ -161,7 +159,7 @@ public class Board implements Constants {
 	void displayColumnHeaders() {
 		socket.print("          ");
 		for (int j = 0; j < 3; j++)
-			System.out.print("|col " + j);
+			socket.print("|col " + j);
 		socket.println();
 	}
 	/**
